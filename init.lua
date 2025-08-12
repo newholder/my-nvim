@@ -1,0 +1,5 @@
+require 'config.options'
+require 'config.keymaps'
+require 'config.lazy-init'
+require 'config.lazy-plugins'
+require 'config.shell'
