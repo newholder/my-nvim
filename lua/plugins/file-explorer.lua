@@ -1,29 +1,41 @@
 return {
-    --[[{
-        'nvim-tree/nvim-tree.lua',
-        version = '*',
-        lazy = false,
-        dependencies = {
-            'nvim-tree/nvim-web-devicons',
-        },
-        config = function()
-            require('nvim-tree').setup {}
-        end,
-    },]]
     {
         'stevearc/oil.nvim',
         ---@module 'oil'
         ---@type oil.SetupOpts
+        opts = {},
+        -- Optional dependencies
+        -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+        dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if you prefer nvim-web-devicons
+
+        -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+        lazy = false,
+    },
+    {
+        'benomahony/oil-git.nvim',
+        dependencies = { 'stevearc/oil.nvim' },
         opts = {
-            -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
+            highlights = {
+                OilGitAdded = { fg = '#a6e3a1' }, -- green
+                OilGitModified = { fg = '#f9e2af' }, -- yellow
+                OilGitDeleted = { fg = '#f38ba8' }, -- red
+                OilGitRenamed = { fg = '#cba6f7' }, -- purple
+                OilGitUntracked = { fg = '#89b4fa' }, -- blue
+                OilGitIgnored = { fg = '#6c7086' }, -- gray
+            },
+        },
+    },
+}
+
+--[[ -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
             -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
             default_file_explorer = true,
             -- Id is automatically added at the beginning, and name at the end
             -- See :help oil-columns
             columns = {
-                'permissions',
-                'size',
-                'mtime',
+                -- 'permissions',
+                -- 'size',
+                -- 'mtime',
                 'icon',
             },
             -- Buffer-local options to use for oil buffers
@@ -43,7 +55,7 @@ return {
                 concealcursor = 'nvic',
             },
             -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
-            delete_to_trash = false,
+            delete_to_trash = true,
             -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
             skip_confirm_for_simple_edits = false,
             -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
@@ -219,13 +231,4 @@ return {
             -- Configuration for the floating keymaps help window
             keymaps_help = {
                 border = 'rounded',
-            },
-        },
-        -- Optional dependencies
-        -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
-        dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if you prefer nvim-web-devicons
-
-        -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-        lazy = false,
-    },
-}
+            }, ]]

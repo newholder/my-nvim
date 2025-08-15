@@ -4,6 +4,9 @@
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<leader>exp', function()
+    require('oil').toggle_float()
+end, { desc = 'Open File Explorer' })
 
 -- Diagnostic keymaps
 vim.keymap.set(
@@ -83,4 +86,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         vim.hl.on_yank()
     end,
 })
-

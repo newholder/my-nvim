@@ -27,7 +27,7 @@ return {
         priority = 1000,
         config = function()
             require('catppuccin').setup {
-                flavour = 'latte',
+                flavour = 'auto',
                 default_integrations = true,
             }
             vim.cmd.colorscheme 'catppuccin'

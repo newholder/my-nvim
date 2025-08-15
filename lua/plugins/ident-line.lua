@@ -1,62 +1,71 @@
 return {
-    'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        main = 'ibl',
-        ---@module "ibl"
-        ---@type ibl.config
-        opts = {},
-        config = function()
-            local highlight = {
-                'RainbowRed',
-                'RainbowYellow',
-                'RainbowBlue',
-                'RainbowOrange',
-                'RainbowGreen',
-                'RainbowViolet',
-                'RainbowCyan',
-            }
-            local hooks = require 'ibl.hooks'
-            -- create the highlight groups in the highlight setup hook, so they are reset
-            -- every time the colorscheme changes
-            hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-                vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
-                vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
-                vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
-                vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
-                vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
-                vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
-                vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
-            end)
-
-            vim.g.rainbow_delimiters = { highlight = highlight }
-            require('ibl').setup { scope = { highlight = highlight } }
-            hooks.register(
-                hooks.type.SCOPE_HIGHLIGHT,
-                hooks.builtin.scope_highlight_from_extmark
-            )
-        end,
-    },
+    -- lazy.nvim
 
     {
-        'echasnovski/mini.indentscope',
-        version = '*',
-        config = function()
-            require('mini.indentscope').setup()
-        end,
-    },
-
-    {
-        'Mr-LLLLL/cool-chunk.nvim',
-        event = { 'CursorHold', 'CursorHoldI' },
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
+        'NMAC427/guess-indent.nvim',
+        opts = {
+            auto_cmd = true,
         },
-        config = function()
-            require('cool-chunk').setup {}
-        end,
     },
 
+    -- Detect tabstop and shiftwidth automatically
+    -- {
+    --     'lukas-reineke/indent-blankline.nvim',
+    --     main = 'ibl',
+    --     ---@module "ibl"
+    --     ---@type ibl.config
+    --     opts = {},
+    --     config = function()
+    --         local highlight = {
+    --             'RainbowRed',
+    --             'RainbowYellow',
+    --             'RainbowBlue',
+    --             'RainbowOrange',
+    --             'RainbowGreen',
+    --             'RainbowViolet',
+    --             'RainbowCyan',
+    --         }
+    --         local hooks = require 'ibl.hooks'
+    --         -- create the highlight groups in the highlight setup hook, so they are reset
+    --         -- every time the colorscheme changes
+    --         hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    --             vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
+    --             vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
+    --             vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
+    --             vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
+    --             vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
+    --             vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
+    --             vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
+    --         end)
+    --
+    --         vim.g.rainbow_delimiters = { highlight = highlight }
+    --         require('ibl').setup { scope = { highlight = highlight } }
+    --         hooks.register(
+    --             hooks.type.SCOPE_HIGHLIGHT,
+    --             hooks.builtin.scope_highlight_from_extmark
+    --         )
+    --     end,
+    -- },
+    --
+    -- {
+    --     'echasnovski/mini.indentscope',
+    --     version = '*',
+    --     config = function()
+    --         require('mini.indentscope').setup()
+    --     end,
+    -- },
+    --
+    -- {
+    --     'Mr-LLLLL/cool-chunk.nvim',
+    --     event = { 'CursorHold', 'CursorHoldI' },
+    --     dependencies = {
+    --         'nvim-treesitter/nvim-treesitter',
+    --     },
+    --     config = function()
+    --         require('cool-chunk').setup {}
+    --     end,
+    -- },
+    --
     -- Rainbow brace
     {
         'HiPhish/rainbow-delimiters.nvim',
@@ -77,24 +86,113 @@ return {
                     lua = 210,
                 },
 
-                --[[highlight = {
-          'RainbowDelimiterRed',
-          'RainbowDelimiterYellow',
-          'RainbowDelimiterBlue',
-          'RainbowDelimiterOrange',
-          'RainbowDelimiterGreen',
-          'RainbowDelimiterViolet',
-          'RainbowDelimiterCyan',
-        },]]
+                highlight = {
+                    'RainbowDelimiterRed',
+                    'RainbowDelimiterYellow',
+                    'RainbowDelimiterBlue',
+                    'RainbowDelimiterOrange',
+                    'RainbowDelimiterGreen',
+                    'RainbowDelimiterViolet',
+                    'RainbowDelimiterCyan',
+                },
             }
         end,
     },
 
-    -- Highlight todo, notes, etc in comments
     {
-        'folke/todo-comments.nvim',
-        event = 'VimEnter',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        opts = { signs = false },
+        'folke/snacks.nvim',
+        ---@type snacks.Config
+        opts = {
+            indent = {
+                indent = {
+                    priority = 1,
+                    enabled = true, -- enable indent guides
+                    char = '│',
+                    only_scope = false, -- only show indent guides of the scope
+                    only_current = false, -- only show indent guides in the current window
+                    hl = 'SnacksIndent', ---@type string|string[] hl groups for indent guides
+                    -- can be a list of hl groups to cycle through
+                    -- hl = {
+                    --     "SnacksIndent1",
+                    --     "SnacksIndent2",
+                    --     "SnacksIndent3",
+                    --     "SnacksIndent4",
+                    --     "SnacksIndent5",
+                    --     "SnacksIndent6",
+                    --     "SnacksIndent7",
+                    --     "SnacksIndent8",
+                    -- },
+                },
+                -- animate scopes. Enabled by default for Neovim >= 0.10
+                -- Works on older versions but has to trigger redraws during animation.
+                ---@class snacks.indent.animate: snacks.animate.Config
+                ---@field enabled? boolean
+                --- * out: animate outwards from the cursor
+                --- * up: animate upwards from the cursor
+                --- * down: animate downwards from the cursor
+                --- * up_down: animate up or down based on the cursor position
+                ---@field style? "out"|"up_down"|"down"|"up"
+                animate = {
+                    enabled = vim.fn.has 'nvim-0.10' == 1,
+                    style = 'out',
+                    easing = 'linear',
+                    duration = {
+                        step = 20, -- ms per step
+                        total = 500, -- maximum duration
+                    },
+                },
+                ---@class snacks.indent.Scope.Config: snacks.scope.Config
+                scope = {
+                    enabled = true, -- enable highlighting the current scope
+                    priority = 200,
+                    char = '│',
+                    underline = true, -- underline the start of the scope
+                    only_current = false, -- only show scope in the current window
+                    -- hl = 'SnacksIndentScope', ---@type string|string[] hl group for scopes
+                    hl = {
+                        'RainbowDelimiterRed',
+                        'RainbowDelimiterYellow',
+                        'RainbowDelimiterBlue',
+                        'RainbowDelimiterOrange',
+                        'RainbowDelimiterGreen',
+                        'RainbowDelimiterViolet',
+                        'RainbowDelimiterCyan',
+                    },
+                },
+                chunk = {
+                    -- when enabled, scopes will be rendered as chunks, except for the
+                    -- top-level scope which will be rendered as a scope.
+                    enabled = true,
+                    -- only show chunk scopes in the current window
+                    only_current = true,
+                    priority = 200,
+                    -- hl = 'SnacksIndentChunk', ---@type string|string[] hl group for chunk scopes
+                    hl = {
+                        'RainbowDelimiterRed',
+                        'RainbowDelimiterYellow',
+                        'RainbowDelimiterBlue',
+                        'RainbowDelimiterOrange',
+                        'RainbowDelimiterGreen',
+                        'RainbowDelimiterViolet',
+                        'RainbowDelimiterCyan',
+                    },
+                    char = {
+                        -- corner_top = '┌',
+                        -- corner_bottom = '└',
+                        corner_top = '╭',
+                        corner_bottom = '╰',
+                        horizontal = '─',
+                        vertical = '│',
+                        arrow = '>',
+                    },
+                },
+                -- filter for buffers to enable indent guides
+                filter = function(buf)
+                    return vim.g.snacks_indent ~= false
+                        and vim.b[buf].snacks_indent ~= false
+                        and vim.bo[buf].buftype == ''
+                end,
+            },
+        },
     },
 }
