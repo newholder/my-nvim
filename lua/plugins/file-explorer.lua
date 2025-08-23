@@ -1,34 +1,19 @@
 return {
+
     {
         'stevearc/oil.nvim',
-        ---@module 'oil'
-        ---@type oil.SetupOpts
-        opts = {},
+
         -- Optional dependencies
         -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
         dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if you prefer nvim-web-devicons
 
         -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
         lazy = false,
-    },
-    {
-        'benomahony/oil-git.nvim',
-        dependencies = { 'stevearc/oil.nvim' },
+        ---@module 'oil'
+        ---@type oil.SetupOpts
         opts = {
-            highlights = {
-                OilGitAdded = { fg = '#a6e3a1' }, -- green
-                OilGitModified = { fg = '#f9e2af' }, -- yellow
-                OilGitDeleted = { fg = '#f38ba8' }, -- red
-                OilGitRenamed = { fg = '#cba6f7' }, -- purple
-                OilGitUntracked = { fg = '#89b4fa' }, -- blue
-                OilGitIgnored = { fg = '#6c7086' }, -- gray
-            },
-        },
-    },
-}
-
---[[ -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
-            -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
+            -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
+            -- Set to false if you want some other plugin (e.g. nietrw) to open when you edit directories.
             default_file_explorer = true,
             -- Id is automatically added at the beginning, and name at the end
             -- See :help oil-columns
@@ -40,14 +25,14 @@ return {
             },
             -- Buffer-local options to use for oil buffers
             buf_options = {
-                buflisted = false,
+                buflisted = true,
                 bufhidden = 'hide',
             },
             -- Window-local options to use for oil buffers
             win_options = {
                 wrap = false,
-                signcolumn = 'no',
-                cursorcolumn = false,
+                signcolumn = 'yes:2',
+                cursorcolumn = true,
                 foldcolumn = '0',
                 spell = false,
                 list = false,
@@ -231,4 +216,59 @@ return {
             -- Configuration for the floating keymaps help window
             keymaps_help = {
                 border = 'rounded',
-            }, ]]
+            },
+        },
+    },
+    {
+        'refractalize/oil-git-status.nvim',
+
+        dependencies = {
+            'stevearc/oil.nvim',
+        },
+
+        opts = {
+            show_ignored = true, -- show files that match gitignore with !!
+            symbols = { -- customize the symbols that appear in the git status columns
+                index = {
+                    ['!'] = '!',
+                    ['?'] = '?',
+                    ['A'] = 'A',
+                    ['C'] = 'C',
+                    ['D'] = 'D',
+                    ['M'] = 'M',
+                    ['R'] = 'R',
+                    ['T'] = 'T',
+                    ['U'] = 'U',
+                    [' '] = ' ',
+                },
+                working_tree = {
+                    ['!'] = '!',
+                    ['?'] = '?',
+                    ['A'] = 'A',
+                    ['C'] = 'C',
+                    ['D'] = 'D',
+                    ['M'] = 'M',
+                    ['R'] = 'R',
+                    ['T'] = 'T',
+                    ['U'] = 'U',
+                    [' '] = ' ',
+                },
+            },
+        },
+    },
+
+    --[[     {
+        'benomahony/oil-git.nvim',
+        dependencies = { 'stevearc/oil.nvim' },
+        opts = {
+            highlights = {
+                OilGitAdded = { fg = '#a6e3a1' }, -- green
+                OilGitModified = { fg = '#f9e2af' }, -- yellow
+                OilGitDeleted = { fg = '#f38ba8' }, -- red
+                OilGitRenamed = { fg = '#cba6f7' }, -- purple
+                OilGitUntracked = { fg = '#89b4fa' }, -- blue
+                OilGitIgnored = { fg = '#6c7086' }, -- gray
+            },
+        },
+    }, ]]
+}
