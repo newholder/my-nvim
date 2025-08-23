@@ -26,4 +26,5 @@ return {
         'echasnovski/mini.sessions',
         opts = {},
     },
+    { 'echasnovski/mini.pairs', version = false, opts = {} },
 }

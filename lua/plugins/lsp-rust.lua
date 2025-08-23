@@ -1,5 +1,3 @@
-print 'this supposed to be disabled'
-
 return {
 
     {
